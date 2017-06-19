@@ -39,7 +39,7 @@ export default () => (
 
         <UL inline>
           <li>
-            🔖
+            📓
             {' '}
             <Link route="blog">
               Blog
