@@ -29,10 +29,6 @@ export default class MyDocument extends Document {
             href="/static/images/favicon.ico"
           />
           <link rel="stylesheet" href="/static/css/atom-one-light.css" />
-          <link
-            rel="stylesheet"
-            href="http://fonts.googleapis.com/css?family=Inconsolata"
-          />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>
 
