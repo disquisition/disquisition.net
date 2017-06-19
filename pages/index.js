@@ -1,0 +1,66 @@
+import A, { Link } from '../components/anchor';
+import Page from '../layouts/main';
+import UL from '../components/unordered-list';
+import glamorous from 'glamorous';
+
+const Box = glamorous.div({
+  padding: '1em 2em',
+  backgroundColor: 'lightcyan',
+  maxWidth: '30em',
+  margin: 'auto'
+});
+
+const Center = glamorous.div({
+  zIndex: -1,
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+});
+
+export default () => (
+  <Page>
+    <Center>
+      <Box>
+        <p>My name is Spenser Isdahl.</p>
+
+        <p>I’m a software engineer based in Chicago, IL.</p>
+
+        <p>
+          I’m currently rearchitecting the front-end of
+          {' '}
+          <A href="https://apartments.com" target="_blank">Apartments.com</A>
+          , but I’m interested in new opportunities.
+        </p>
+
+        <UL inline>
+          <li>
+            🤔
+            {' '}
+            <Link route="blog">
+              Blog
+            </Link>
+          </li>
+          <li>
+            💾
+            {' '}
+            <A href="https://github.com/disquisition" target="_blank">
+              GitHub
+            </A>
+          </li>
+          <li>
+            📬
+            {' '}
+            <A href="mailto:scisdahl@gmail.com">
+              E-mail
+            </A>
+          </li>
+        </UL>
+      </Box>
+    </Center>
+  </Page>
+);

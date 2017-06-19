@@ -1,0 +1,43 @@
+{
+  "name": "disquisition.net",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node server.js"
+  },
+  "now": {
+    "name": "disquisition",
+    "alias": "disquisition.net"
+  },
+  "dependencies": {
+    "cross-env": "^5.0.1",
+    "express": "^4.15.3",
+    "glamor": "^2.20.25",
+    "glamorous": "^3.23.3",
+    "hast-to-hyperscript": "^3.0.0",
+    "highlight.js": "^9.12.0",
+    "isomorphic-unfetch": "^1.0.0",
+    "markdown-it": "^8.3.1",
+    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-named-headers": "0.0.4",
+    "moment": "^2.18.1",
+    "next": "^2.4.4",
+    "next-routes": "^1.0.27",
+    "nprogress": "^0.2.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "rehype-parse": "^3.1.0",
+    "sane": "^1.7.0",
+    "typeset": "^0.2.2",
+    "unified": "^6.1.5",
+    "yaml-front-matter": "^3.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.1.0"
+  }
+}
