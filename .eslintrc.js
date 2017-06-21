@@ -11,12 +11,11 @@ module.exports = {
       jsx: true
     }
   },
-  extends: 'eslint:recommended',
-  plugins: ['react'],
+  plugins: ['jsx-a11y', 'react'],
+  extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended'],
   rules: {
     // core
     indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single', { avoidEscape: true }],
     'no-console': 'warn',
     semi: ['error', 'always'],

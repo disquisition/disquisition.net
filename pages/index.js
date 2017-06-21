@@ -39,21 +39,21 @@ export default () => (
 
         <UL inline>
           <li>
-            📓
+            <span role="img" aria-label="notebook">📓</span>
             {' '}
             <Link route="blog">
               Blog
             </Link>
           </li>
           <li>
-            💾
+            <span role="img" aria-label="floppy disc">💾</span>
             {' '}
             <A href="https://github.com/disquisition" target="_blank">
               GitHub
             </A>
           </li>
           <li>
-            📬
+            <span role="img" aria-label="mailbox">📬</span>
             {' '}
             <A href="mailto:scisdahl@gmail.com">
               E-mail
