@@ -7,6 +7,7 @@ const WrappedAnchor = ({ children, ...props }) => {
   return <a rel={rel} {...props}>{children}</a>;
 };
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 const WrappedLink = ({ children, className, ...props }) => (
   <RouterLink {...props}>
     <a className={className}>
@@ -14,6 +15,7 @@ const WrappedLink = ({ children, className, ...props }) => (
     </a>
   </RouterLink>
 );
+/* eslint-enable jsx-a11y/anchor-is-valid */
 
 const styles = [
   {
