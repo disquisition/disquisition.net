@@ -1,11 +1,12 @@
 /* eslint-env node */
-const Dotenv = require('dotenv-webpack');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = {
   webpack: config => {
     config.plugins.push(
-      new Dotenv({
-        safe: true
+      new DotenvPlugin({
+        sample: './.env.example',
+        path: './.env'
       })
     );
 
