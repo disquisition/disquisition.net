@@ -1,4 +1,4 @@
-import A from '../components/anchor';
+import A from '../anchor';
 import { Footer } from 'glamorous';
 
 export default () => (

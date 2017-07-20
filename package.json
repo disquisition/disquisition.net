@@ -10,10 +10,13 @@
   },
   "now": {
     "name": "disquisition",
-    "alias": "disquisition.net"
+    "alias": "disquisition.net",
+    "dotenv": true
   },
   "dependencies": {
     "cross-env": "^5.0.1",
+    "dotenv-safe": "^4.0.4",
+    "dotenv-webpack": "^1.5.3",
     "express": "^4.15.3",
     "glamor": "^2.20.25",
     "glamorous": "^3.23.4",
