@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-const TwoColumns = ({
+const ResumeBody = ({
   children: { columnOne: ColumnOne, columnTwo: ColumnTwo },
   ...props
 }) => (
@@ -10,7 +10,7 @@ const TwoColumns = ({
   </div>
 );
 
-export default glamorous(TwoColumns, {
+export default glamorous(ResumeBody, {
   rootEl: 'div'
 })({
   display: 'grid',

@@ -20,30 +20,27 @@ const ResumeHeading = glamorous.h1({
   }
 });
 
-const resumeHeaderFactory = glamorous(
-  props => (
-    <header {...props}>
-      <ResumeHeading>Spenser Isdahl</ResumeHeading>
+const ResumeHeader = props => (
+  <header {...props}>
+    <ResumeHeading>Spenser Isdahl</ResumeHeading>
 
-      <StarBar />
+    <StarBar />
 
-      <Line>
-        <TextLink href="https://disquisition.net" target="_blank">
-          disquisition.net
-        </TextLink>
-        {' / '}
-        <TextLink href="https://github.com/disquisition" target="_blank">
-          github.com/disquisition
-        </TextLink>
-      </Line>
-      <Line>scisdahl@gmail.com</Line>
-      <Line>{process.env.PHONE_NUMBER}</Line>
-    </header>
-  ),
-  { rootEl: 'header' }
+    <Line>
+      <TextLink href="https://disquisition.net" target="_blank">
+        disquisition.net
+      </TextLink>
+      {' / '}
+      <TextLink href="https://github.com/disquisition" target="_blank">
+        github.com/disquisition
+      </TextLink>
+    </Line>
+    <Line>scisdahl@gmail.com</Line>
+    <Line>{process.env.PHONE_NUMBER}</Line>
+  </header>
 );
 
-export default resumeHeaderFactory(
+export default glamorous(ResumeHeader, { rootEl: 'header' })(
   {
     textAlign: 'center',
     marginBottom: '2rem'

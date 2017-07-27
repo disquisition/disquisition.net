@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "next/babel"
+    ],
+    "plugins": [
+        "glamorous-displayname",
+        "transform-react-stateless-component-name"
+    ]
+}

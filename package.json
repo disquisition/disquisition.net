@@ -14,6 +14,8 @@
     "dotenv": true
   },
   "dependencies": {
+    "babel-plugin-glamorous-displayname": "^1.1.3",
+    "babel-plugin-transform-react-stateless-component-name": "^1.1.1",
     "cross-env": "^5.0.1",
     "dotenv-safe": "^4.0.4",
     "express": "^4.15.3",

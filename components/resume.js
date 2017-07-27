@@ -137,35 +137,32 @@ const experienceSection = (
   </Section>
 );
 
-const resumeFactory = glamorous(
-  props => (
-    <div {...props}>
-      <ResumeHeader />
+const Resume = props => (
+  <div {...props}>
+    <ResumeHeader />
 
-      <ResumeBody>
-        {{
-          columnOne: () => (
-            <div>
-              {experienceSection}
-            </div>
-          ),
-          columnTwo: () => (
-            <div>
-              {profileSection}
-              {skillsSection}
-              {educationSection}
-            </div>
-          )
-        }}
-      </ResumeBody>
+    <ResumeBody>
+      {{
+        columnOne: () => (
+          <div>
+            {experienceSection}
+          </div>
+        ),
+        columnTwo: () => (
+          <div>
+            {profileSection}
+            {skillsSection}
+            {educationSection}
+          </div>
+        )
+      }}
+    </ResumeBody>
 
-      <ResumeFooter />
-    </div>
-  ),
-  { rootEl: 'div' }
+    <ResumeFooter />
+  </div>
 );
 
-export default resumeFactory(
+export default glamorous(Resume, { rootEl: 'div' })(
   {
     margin: 'auto',
     width: '50rem',
