@@ -22,8 +22,8 @@ const styles = [
     textDecoration: 'none',
     ':hover': { textDecoration: 'underline' }
   },
-  (props, themes) => ({
-    color: themes.main.color
+  ({ theme }) => ({
+    color: theme.main.color
   })
 ];
 

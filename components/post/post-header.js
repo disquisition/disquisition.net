@@ -1,7 +1,7 @@
 import glamorous, { H1 } from 'glamorous';
 
-const PostHeader = glamorous.header((props, themes) => ({
-  color: themes.main.color,
+const PostHeader = glamorous.header(({ theme }) => ({
+  color: theme.main.color,
   lineHeight: 1.4
 }));
 
