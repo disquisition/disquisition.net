@@ -2,7 +2,7 @@ import glamorous from 'glamorous';
 import { Link as RouterLink } from '../routes';
 
 const WrappedAnchor = ({ children, ...props }) => {
-  const rel = props.target === '_blank' ? 'noopenner noreferrer' : null;
+  const rel = props.target === '_blank' ? 'noopener noreferrer' : null;
 
   return <a rel={rel} {...props}>{children}</a>;
 };
