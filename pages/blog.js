@@ -1,4 +1,5 @@
 import Page from '../layouts/main';
+import PropTypes from 'prop-types';
 import React from 'react';
 import UL from '../components/unordered-list';
 import fetch from 'isomorphic-unfetch';
@@ -6,13 +7,23 @@ import getOrigin from '../lib/getOrigin';
 import { Div, Li } from 'glamorous';
 import { Link } from '../components/anchor';
 
-export default class extends React.Component {
+export default class Blog extends React.Component {
   static async getInitialProps({ req }) {
     const res = await fetch(`${getOrigin(req)}/api/posts`);
     const posts = await res.json();
 
     return { posts };
   }
+
+  static propTypes = {
+    posts: PropTypes.arrayOf(
+      PropTypes.shape({
+        date: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired
+      })
+    ).isRequired
+  };
 
   render() {
     const { posts } = this.props;

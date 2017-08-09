@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import NProgress from 'nprogress';
+import PropTypes from 'prop-types';
 import themes from '../themes';
 import { Router } from '../routes';
 import { css, rehydrate } from 'glamor';
@@ -46,7 +47,7 @@ Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-export default ({ children }) => (
+const BaseLayout = ({ children }) => (
   <ThemeProvider theme={themes}>
     <div>
       <Head>
@@ -57,3 +58,9 @@ export default ({ children }) => (
     </div>
   </ThemeProvider>
 );
+
+BaseLayout.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default BaseLayout;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 const ResumeBody = ({
@@ -9,6 +10,13 @@ const ResumeBody = ({
     <ColumnTwo />
   </div>
 );
+
+ResumeBody.propTypes = {
+  children: PropTypes.shape({
+    columnOne: PropTypes.func.isRequired,
+    columnTwo: PropTypes.func.isRequired
+  }).isRequired
+};
 
 export default glamorous(ResumeBody, {
   rootEl: 'div'

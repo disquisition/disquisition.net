@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 const BaseCode = glamorous.code({
@@ -15,10 +16,17 @@ const StyledCode = glamorous(BaseCode)({
   }
 });
 
-export default ({ children, ...props }) => {
+const Code = ({ children, ...props }) => {
   const isHighlighted = props.className && props.className.includes('hljs');
 
   return isHighlighted
     ? <BaseCode {...props}>{children}</BaseCode>
     : <StyledCode {...props}>{children}</StyledCode>;
 };
+
+Code.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string
+};
+
+export default Code;
