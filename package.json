@@ -28,7 +28,7 @@
     "markdown-it-footnote": "^3.0.1",
     "markdown-it-named-headers": "0.0.4",
     "moment": "^2.18.1",
-    "next": "^2.4.9",
+    "next": "^3.0.3",
     "next-routes": "^1.0.40",
     "nprogress": "^0.2.0",
     "react": "^15.6.1",
