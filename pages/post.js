@@ -7,7 +7,8 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import getOrigin from '../lib/getOrigin';
 import renderPost from '../lib/renderPost';
-import { Article } from 'glamorous';
+import { Article, Div } from 'glamorous';
+import { Link } from '../components/anchor';
 
 export default class Post extends React.Component {
   static async getInitialProps({ query: { slug }, req }) {
@@ -39,13 +40,19 @@ export default class Post extends React.Component {
           />
         </Head>
 
-        <Article maxWidth="30em" margin="auto" lineHeight={1.6}>
-          {renderPost(post)}
+        <Div maxWidth="30em" margin="auto">
+          <Link route="blog" css={{ ':hover': { textDecoration: 'none' } }}>
+            ↜ Blog
+          </Link>
 
-          <Hr />
+          <Article lineHeight={1.6}>
+            {renderPost(post)}
 
-          <PostFooter />
-        </Article>
+            <Hr />
+
+            <PostFooter />
+          </Article>
+        </Div>
       </Page>
     );
   }
