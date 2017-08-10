@@ -19,6 +19,7 @@ app.prepare().then(() => {
   server.use(handler);
 
   server.listen(3000, () => {
+    // eslint-disable-next-line no-console
     console.log('Server listing on http://localhost:3000');
   });
 });
