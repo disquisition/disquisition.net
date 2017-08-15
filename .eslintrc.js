@@ -21,6 +21,7 @@ module.exports = {
     semi: ['error', 'always'],
 
     // react
+    'react/boolean-prop-naming': 'warn',
     'react/jsx-key': 'error',
     'react/jsx-no-comment-textnodes': 'error',
     'react/jsx-no-duplicate-props': 'error',
@@ -36,6 +37,7 @@ module.exports = {
     'react/no-is-mounted': 'error',
     'react/no-render-return-value': 'error',
     'react/no-string-refs': 'error',
+    'react/no-typos': 'error',
     'react/no-unescaped-entities': 'error',
     'react/no-unknown-property': 'error',
     'react/prop-types': 'warn',
