@@ -4,8 +4,15 @@ import React from 'react';
 import UL from '../components/unordered-list';
 import fetch from 'isomorphic-unfetch';
 import getOrigin from '../lib/getOrigin';
-import { Div, Li } from 'glamorous';
+import glamorous from 'glamorous';
 import { Link } from '../components/anchor';
+
+const BlogListItem = glamorous.li({ display: 'flex', marginBottom: '.25em' });
+const RightColumn = glamorous.div({ flex: '50% 1 1' });
+const LeftColumn = glamorous(RightColumn)({
+  textAlign: 'right',
+  marginRight: '1em'
+});
 
 export default class Blog extends React.Component {
   static async getInitialProps({ req }) {
@@ -32,16 +39,17 @@ export default class Blog extends React.Component {
       <Page>
         <UL unstyled css={{ margin: 0 }}>
           {posts.map(({ date, slug, title }) => (
-            <Li key={slug} display="flex" marginBottom=".25em">
-              <Div flex="50% 1 1" textAlign="right" marginRight="1em">
+            <BlogListItem key={slug}>
+              <LeftColumn>
                 {date}
-              </Div>
-              <Div flex="50% 1 1">
+              </LeftColumn>
+
+              <RightColumn>
                 <Link route="post" params={{ slug }}>
                   {title}
                 </Link>
-              </Div>
-            </Li>
+              </RightColumn>
+            </BlogListItem>
           ))}
         </UL>
       </Page>
