@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 const SectionHeadingText = glamorous.span(
@@ -19,20 +20,21 @@ const SectionHeadingText = glamorous.span(
   })
 );
 
-const sectionHeadingFactory = glamorous(
-  ({ children, ...props }) => (
-    <h2 {...props}>
-      <SectionHeadingText>
-        {children}
-      </SectionHeadingText>
-    </h2>
-  ),
-  {
-    rootEl: 'h2'
-  }
+const SectionHeading = ({ children, ...props }) => (
+  <h2 {...props}>
+    <SectionHeadingText>
+      {children}
+    </SectionHeadingText>
+  </h2>
 );
 
-export default sectionHeadingFactory({
+SectionHeading.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default glamorous(SectionHeading, {
+  rootEl: 'h2'
+})({
   margin: 0,
   marginBottom: '-1.2rem',
   textAlign: 'right',
