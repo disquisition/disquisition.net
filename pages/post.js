@@ -1,3 +1,4 @@
+import A from '../components/anchor';
 import Head from 'next/head';
 import Hr from '../components/horizontal-rule';
 import Page from '../layouts/main';
@@ -5,10 +6,9 @@ import PostFooter from '../components/post/post-footer';
 import PropTypes from 'prop-types';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import getOrigin from '../lib/getOrigin';
-import renderPost from '../lib/renderPost';
+import getOrigin from '../lib/get-origin';
+import renderPost from '../lib/render-post';
 import { Article, Div } from 'glamorous';
-import { Link } from '../components/anchor';
 
 export default class Post extends React.Component {
   static async getInitialProps({ query: { slug }, req }) {
@@ -41,9 +41,9 @@ export default class Post extends React.Component {
         </Head>
 
         <Div maxWidth="30em" margin="auto">
-          <Link route="blog" css={{ ':hover': { textDecoration: 'none' } }}>
+          <A route="blog" css={{ ':hover': { textDecoration: 'none' } }}>
             ↜ Blog
-          </Link>
+          </A>
 
           <Article lineHeight={1.6}>
             {renderPost(post)}

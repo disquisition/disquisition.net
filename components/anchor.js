@@ -1,6 +1,18 @@
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import isRelativeUrl from 'is-relative-url';
+import isUrlFragment from '../lib/is-url-fragment';
 import { Link as RouterLink } from '../routes';
+
+const styles = [
+  {
+    textDecoration: 'none',
+    ':hover': { textDecoration: 'underline' }
+  },
+  ({ theme }) => ({
+    color: theme.main.color
+  })
+];
 
 const WrappedAnchor = ({ children, ...props }) => {
   const rel = props.target === '_blank' ? 'noopener noreferrer' : null;
@@ -13,6 +25,10 @@ WrappedAnchor.propTypes = {
   target: PropTypes.string
 };
 
+export const StyledAnchor = glamorous(WrappedAnchor, { rootEl: 'a' })(
+  ...styles
+);
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const WrappedLink = ({ children, className, ...props }) => (
   <RouterLink {...props}>
@@ -24,23 +40,31 @@ const WrappedLink = ({ children, className, ...props }) => (
 /* eslint-enable jsx-a11y/anchor-is-valid */
 
 WrappedLink.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]).isRequired,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string
 };
 
-const styles = [
-  {
-    textDecoration: 'none',
-    ':hover': { textDecoration: 'underline' }
-  },
-  ({ theme }) => ({
-    color: theme.main.color
-  })
-];
+export const StyledLink = glamorous(WrappedLink)(...styles);
 
-export default glamorous(WrappedAnchor, { rootEl: 'a' })(...styles);
-export const Link = glamorous(WrappedLink)(...styles);
+const Anchor = props => {
+  const { href, route, to } = props;
+
+  if (route || to || (isRelativeUrl(href) && !isUrlFragment(href))) {
+    const newProps = Object.assign({}, props, {
+      href: undefined,
+      route: route || to || href
+    });
+
+    return <StyledLink {...newProps} />;
+  } else {
+    return <StyledAnchor {...props} />;
+  }
+};
+
+Anchor.propTypes = {
+  href: PropTypes.string,
+  route: PropTypes.string,
+  to: PropTypes.string
+};
+
+export default Anchor;

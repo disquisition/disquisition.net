@@ -1,6 +1,6 @@
+import A from '../components/anchor';
 import Base from './base';
 import PropTypes from 'prop-types';
-import { Link } from '../components/anchor';
 import glamorous, { Div } from 'glamorous';
 
 const Logo = glamorous.span({
@@ -15,9 +15,9 @@ const Logo = glamorous.span({
 const MainLayout = ({ children }) => (
   <Base>
     <Div textAlign="center">
-      <Link route="about">
+      <A route="about">
         <Logo>disquisition.net</Logo>
-      </Link>
+      </A>
     </Div>
 
     {children}

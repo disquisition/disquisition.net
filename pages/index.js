@@ -1,4 +1,4 @@
-import A, { Link } from '../components/anchor';
+import A from '../components/anchor';
 import Page from '../layouts/main';
 import UL from '../components/unordered-list';
 import glamorous from 'glamorous';
@@ -41,9 +41,9 @@ export default () => (
           <li>
             <span role="img" aria-label="notebook">📓</span>
             {' '}
-            <Link route="blog">
+            <A route="blog">
               Blog
-            </Link>
+            </A>
           </li>
           <li>
             <span role="img" aria-label="floppy disc">💾</span>

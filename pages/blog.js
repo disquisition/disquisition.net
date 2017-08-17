@@ -1,11 +1,11 @@
+import A from '../components/anchor';
 import Page from '../layouts/main';
 import PropTypes from 'prop-types';
 import React from 'react';
 import UL from '../components/unordered-list';
 import fetch from 'isomorphic-unfetch';
-import getOrigin from '../lib/getOrigin';
+import getOrigin from '../lib/get-origin';
 import glamorous from 'glamorous';
-import { Link } from '../components/anchor';
 
 const BlogListItem = glamorous.li({ display: 'flex', marginBottom: '.25em' });
 const RightColumn = glamorous.div({ flex: '50% 1 1' });
@@ -45,9 +45,9 @@ export default class Blog extends React.Component {
               </LeftColumn>
 
               <RightColumn>
-                <Link route="post" params={{ slug }}>
+                <A route="post" params={{ slug }}>
                   {title}
-                </Link>
+                </A>
               </RightColumn>
             </BlogListItem>
           ))}

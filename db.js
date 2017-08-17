@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const sane = require('sane');
 
-const parsePost = require('./lib/parsePost');
+const parsePost = require('./lib/parse-post');
 
 // let postFields = [
 //   "shorturl",
