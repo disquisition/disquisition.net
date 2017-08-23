@@ -34,7 +34,7 @@ export default () => (
           I’m currently rearchitecting the front-end of
           {' '}
           <A href="https://apartments.com" target="_blank">Apartments.com</A>
-          , but I’m interested in new opportunities.
+          .
         </p>
 
         <UL inline>
