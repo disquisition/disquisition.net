@@ -13,6 +13,9 @@ module.exports = {
   },
   plugins: ['jsx-a11y', 'react'],
   extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended'],
+  globals: {
+    Promise: false
+  },
   rules: {
     // core
     indent: ['error', 2],

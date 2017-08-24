@@ -2,10 +2,10 @@
 const express = require('express');
 const next = require('next');
 
+require('dotenv-safe').load();
+
 const api = require('./api');
 const routes = require('./routes');
-
-require('dotenv-safe').load();
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });

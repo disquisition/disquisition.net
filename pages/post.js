@@ -2,6 +2,7 @@ import A from '../components/anchor';
 import Head from 'next/head';
 import Hr from '../components/horizontal-rule';
 import Page from '../layouts/main';
+import PostHeroImage from '../components/post/post-hero-image';
 import PostFooter from '../components/post/post-footer';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -39,6 +40,8 @@ export default class Post extends React.Component {
             href={`https://disquisition.net/blog/${post.slug}`}
           />
         </Head>
+
+        <PostHeroImage image={post.image} />
 
         <Div maxWidth="30em" margin="auto">
           <A route="blog" css={{ ':hover': { textDecoration: 'none' } }}>

@@ -1,54 +1,44 @@
 /* eslint-env node */
+const defaultTo = require('lodash/defaultTo');
 const fs = require('fs');
 const path = require('path');
+const pick = require('lodash/pick');
 const sane = require('sane');
+const toPairs = require('lodash/toPairs');
+const util = require('util');
 
 const parsePost = require('./lib/parse-post');
 
-// let postFields = [
-//   "shorturl",
-//   "title",
-//   "abstract",
-//   "content",
-//   "date",
-//   "published",
-//   "tags",
-//   "headerimg",
-//   "headerimgfull",
-//   "readnext",
-//   "assets"
-// ];
+const readDir = util.promisify(fs.readdir);
+const readFile = util.promisify(fs.readFile);
 
 let _postIndex = {};
 let _allPosts = [];
-// let _sqliteDb;
 
-// function _getPosts(keys) {
-//   return keys.map(k => _postIndex[k]);
-// }
+const defaultQueryOpts = {
+  select: ['date', 'slug', 'title']
+};
 
-function _runQuery(opts) {
-  opts = opts || {};
+function _runQuery(opts = {}) {
+  opts = Object.assign({}, defaultQueryOpts, opts);
+
   let posts = _allPosts;
 
   if (opts.filter) {
-    for (let name in opts.filter) {
+    toPairs(opts.filter).forEach(([key, value]) => {
       posts = posts.filter(post => {
-        if (post[name] && post[name].length) {
-          return post[name].indexOf(opts.filter[name]) !== -1;
-        }
+        const postValue = defaultTo(post[key], false);
 
-        const val = post[name] === undefined ? false : post[name];
-        return val === opts.filter[name];
+        return Array.isArray(postValue)
+          ? postValue.includes(value)
+          : postValue === value;
       });
-    }
+    });
   }
 
-  // if (opts.select) {
-  //     posts = posts.map(x => {
-  //         return t.toObj(opts.select, t.map(name => [name, x[name]]));
-  //     });
-  // }
+  if (opts.select) {
+    posts = posts.map(post => pick(post, opts.select));
+  }
 
   if (opts.limit) {
     posts = posts.slice(0, opts.limit);
@@ -75,21 +65,26 @@ function getPost(key) {
   return _postIndex[key];
 }
 
-function indexPosts(dirpath) {
+async function indexPosts(dirpath) {
   _postIndex = {};
   _allPosts = [];
 
-  fs.readdirSync(dirpath).forEach(file => {
-    if (!file.match(/\.md$/)) {
-      return;
-    }
+  const files = await readDir(dirpath);
 
-    const contents = fs.readFileSync(path.join(dirpath, file));
-    const post = parsePost(file, contents);
+  await Promise.all(
+    files
+      .filter(file => {
+        return file.match(/\.md$/);
+      })
+      .map(async file => {
+        const filePath = path.join(dirpath, file);
+        const contents = await readFile(filePath);
+        const post = await parsePost(file, contents);
 
-    _postIndex[post.slug] = post;
-    _allPosts.push(post);
-  });
+        _postIndex[post.slug] = post;
+        _allPosts.push(post);
+      })
+  );
 
   _allPosts.sort((a, b) => {
     if (a.timestamp < b.timestamp) {
