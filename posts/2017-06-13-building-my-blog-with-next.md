@@ -1,6 +1,7 @@
 ---
 published: true
 unsplash_photo_id: qmoMjl_kGvM
+description: I decided to build a blog.
 ---
 
 # Building My Blog With Next.js

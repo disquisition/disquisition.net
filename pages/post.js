@@ -1,7 +1,7 @@
 import A from '../components/anchor';
-import Head from 'next/head';
 import Hr from '../components/horizontal-rule';
 import Page from '../layouts/main';
+import PostHead from '../components/post/post-head';
 import PostHeroImage from '../components/post/post-hero-image';
 import PostFooter from '../components/post/post-footer';
 import PropTypes from 'prop-types';
@@ -23,8 +23,19 @@ export default class Post extends React.Component {
     post: PropTypes.shape({
       content: PropTypes.object.isRequired,
       date: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      image: PropTypes.shape({
+        link: PropTypes.string.isRequired,
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+        user: PropTypes.shape({
+          link: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired
+        }).isRequired
+      }),
       slug: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired
+      title: PropTypes.string.isRequired,
+      timestamp: PropTypes.number.isRequired
     }).isRequired
   };
 
@@ -33,13 +44,7 @@ export default class Post extends React.Component {
 
     return (
       <Page>
-        <Head>
-          <title>{post.title}</title>
-          <link
-            rel="canonical"
-            href={`https://disquisition.net/blog/${post.slug}`}
-          />
-        </Head>
+        <PostHead post={post} />
 
         <PostHeroImage image={post.image} />
 

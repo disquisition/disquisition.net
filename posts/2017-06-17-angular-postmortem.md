@@ -1,6 +1,7 @@
 ---
 published: true
 unsplash_photo_id: wgt0zlmWisM
+description: 'My opinion on Angular is: take the best parts and use them with React.'
 ---
 
 # Angular 2 Postmortem
