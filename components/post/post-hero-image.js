@@ -80,7 +80,7 @@ PostHeroImage.propTypes = {
       link: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     }).isRequired
-  })
+  }).isRequired
 };
 
 export default glamorous(PostHeroImage)({

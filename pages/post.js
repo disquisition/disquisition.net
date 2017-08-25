@@ -32,7 +32,7 @@ export default class Post extends React.Component {
           link: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired
         }).isRequired
-      }),
+      }).isRequired,
       slug: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       timestamp: PropTypes.number.isRequired
