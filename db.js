@@ -66,24 +66,20 @@ function getPost(key, query = {}) {
 }
 
 async function indexPosts(dirpath) {
+  const files = (await readDir(dirpath)).filter(file => file.match(/\.md$/));
+
   _postIndex = {};
   _allPosts = [];
 
-  const files = await readDir(dirpath);
-
   await Promise.all(
-    files
-      .filter(file => {
-        return file.match(/\.md$/);
-      })
-      .map(async file => {
-        const filePath = path.join(dirpath, file);
-        const contents = await readFile(filePath);
-        const post = await parsePost(file, contents);
+    files.map(async file => {
+      const filePath = path.join(dirpath, file);
+      const contents = await readFile(filePath);
+      const post = await parsePost(file, contents);
 
-        _postIndex[post.slug] = post;
-        _allPosts.push(post);
-      })
+      _postIndex[post.slug] = post;
+      _allPosts.push(post);
+    })
   );
 
   _allPosts.sort((a, b) => {
