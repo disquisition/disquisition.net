@@ -6,7 +6,9 @@ const { getPost, indexPosts, queryPosts, watchPosts } = require('./db');
 const api = express();
 
 api.get('/posts', (req, res) => {
-  const posts = queryPosts();
+  const posts = queryPosts({
+    select: ['date', 'slug', 'title']
+  });
 
   if (posts) {
     res.json(posts);
@@ -16,7 +18,17 @@ api.get('/posts', (req, res) => {
 });
 
 api.get('/posts/:slug', (req, res) => {
-  const post = getPost(req.params.slug);
+  const post = getPost(req.params.slug, {
+    select: [
+      'content',
+      'date',
+      'description',
+      'image',
+      'slug',
+      'title',
+      'timestamp'
+    ]
+  });
 
   if (post) {
     res.json(post);

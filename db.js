@@ -15,17 +15,11 @@ const readFile = util.promisify(fs.readFile);
 let _postIndex = {};
 let _allPosts = [];
 
-const defaultQueryOpts = {
-  select: ['date', 'slug', 'title']
-};
-
-function _runQuery(opts = {}) {
-  opts = Object.assign({}, defaultQueryOpts, opts);
-
+function _runQuery(query = {}) {
   let posts = _allPosts;
 
-  if (opts.filter) {
-    toPairs(opts.filter).forEach(([key, value]) => {
+  if (query.filter) {
+    toPairs(query.filter).forEach(([key, value]) => {
       posts = posts.filter(post => {
         const postValue = defaultTo(post[key], false);
 
@@ -36,12 +30,12 @@ function _runQuery(opts = {}) {
     });
   }
 
-  if (opts.select) {
-    posts = posts.map(post => pick(post, opts.select));
+  if (query.select) {
+    posts = posts.map(post => pick(post, query.select));
   }
 
-  if (opts.limit) {
-    posts = posts.slice(0, opts.limit);
+  if (query.limit) {
+    posts = posts.slice(0, query.limit);
   }
 
   return posts;
@@ -61,8 +55,14 @@ function queryPosts(query = {}) {
   return _runQuery(query);
 }
 
-function getPost(key) {
-  return _postIndex[key];
+function getPost(key, query = {}) {
+  let post = _postIndex[key];
+
+  if (query.select) {
+    post = pick(post, query.select);
+  }
+
+  return post;
 }
 
 async function indexPosts(dirpath) {

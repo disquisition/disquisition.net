@@ -5,6 +5,7 @@ const next = require('next');
 require('dotenv-safe').load();
 
 const api = require('./api');
+const feeds = require('./feeds');
 const routes = require('./routes');
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -15,6 +16,8 @@ app.prepare().then(() => {
   const server = express();
 
   server.use('/api', api);
+
+  server.use('/feeds', feeds);
 
   server.use(handler);
 
