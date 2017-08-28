@@ -9,7 +9,7 @@ function _getFeed() {
 
   const feed = new Feed({
     title: 'disquisition.net',
-    description: "Spenser Isdahl's thoughts and feelings",
+    description: "Spenser Isdahl's blog",
     id: 'https://disquisition.net',
     link: 'https://disquisition.net',
     image: 'https://disquisition.net/static/image/disquisition-net-logo.jpg',
