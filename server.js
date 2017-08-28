@@ -9,11 +9,17 @@ const feeds = require('./feeds');
 const routes = require('./routes');
 
 const dev = process.env.NODE_ENV !== 'production';
+const gsv = `${process.env.GOOGLE_SITE_VERIFICATION}.html`;
+
 const app = next({ dev });
 const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
   const server = express();
+
+  server.get(`/${gsv}`, (req, res) => {
+    res.send(`google-site-verification: ${gsv}`);
+  });
 
   server.use('/api', api);
 
