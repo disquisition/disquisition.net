@@ -1,10 +1,17 @@
 import A from '../anchor';
 import PropTypes from 'prop-types';
+import React from 'react';
 import glamorous from 'glamorous';
+import { css } from 'glamor';
 
 const captionColor = '#bbb';
 const unsplashQueryParams =
   'utm_source=disquisition&utm_medium=referral&utm_content=creditCopyText';
+
+const fadeIn = css.keyframes({
+  '0%': { opacity: 0 },
+  '100%': { opacity: 1 }
+});
 
 const Caption = glamorous.p({
   color: captionColor,
@@ -17,17 +24,31 @@ const CaptionLink = glamorous(A)({
   color: captionColor
 });
 
-const Image = glamorous
+const StyledHeroImage = glamorous
   .div(
-    ({ src }) => ({
-      backgroundImage: `url(${src})`
-    }),
+    ({ src }) =>
+      (src
+        ? {
+          '&:before': {
+            content: ' ',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            background: `url(${src})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            animation: `${fadeIn} .25s linear`
+          }
+        }
+        : {}),
     {
+      position: 'relative',
       width: 720,
       height: 360,
       maxWidth: '100%',
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
+      background: '#eee',
       margin: 'auto',
       '@media screen and (max-width: 720px)': {
         height: 240
@@ -46,9 +67,39 @@ const Image = glamorous
     }
   );
 
+class HeroImage extends React.Component {
+  static propTypes = {
+    src: PropTypes.string.isRequired
+  };
+
+  state = {
+    isImageLoaded: false
+  };
+
+  componentDidMount() {
+    const image = new Image();
+
+    image.onload = () => this.setState({ isImageLoaded: true });
+
+    image.src = this.props.src;
+  }
+
+  render() {
+    const { src, ...rest } = this.props;
+    const { isImageLoaded } = this.state;
+
+    return isImageLoaded
+      ? <StyledHeroImage {...rest} src={src} />
+      : <StyledHeroImage {...rest} />;
+  }
+}
+
 const PostHeroImage = ({ className, image }) => (
   <div className={className}>
-    <Image src={image.link} alt={`Photo by ${image.user.name} / Unsplash`} />
+    <HeroImage
+      src={image.link}
+      alt={`Photo by ${image.user.name} / Unsplash`}
+    />
 
     <Caption>
       Photo by
