@@ -1,14 +1,15 @@
 import A from '../components/anchor';
 import Hr from '../components/horizontal-rule';
 import Page from '../layouts/main';
+import PostBody from '../components/post/post-body';
 import PostHead from '../components/post/post-head';
+import PostHeader from '../components/post/post-header';
 import PostHeroImage from '../components/post/post-hero-image';
 import PostFooter from '../components/post/post-footer';
 import PropTypes from 'prop-types';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import getOrigin from '../lib/get-origin';
-import renderPost from '../lib/render-post';
 import { Article, Div } from 'glamorous';
 
 export default class Post extends React.Component {
@@ -54,7 +55,9 @@ export default class Post extends React.Component {
           </A>
 
           <Article lineHeight={1.6}>
-            {renderPost(post)}
+            <PostHeader date={post.date}>{post.title}</PostHeader>
+
+            <PostBody hast={post.content} />
 
             <Hr />
 
