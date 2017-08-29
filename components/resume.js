@@ -10,8 +10,8 @@ import glamorous, { P } from 'glamorous';
 const profileSection = (
   <Section title="Profile">
     <p>
-      I am a front-end software developer specializing in web applications. I
-      am seeking a position where I can leverage my expertise architecting and
+      I am a front-end software developer specializing in web applications. I am
+      seeking a position where I can leverage my expertise architecting and
       building JavaScript applications.
     </p>
     <p>
@@ -141,13 +141,9 @@ const Resume = props => (
   <div {...props}>
     <ResumeHeader />
 
-    <ResumeBody>
-      {{
-        columnOne: () => (
-          <div>
-            {experienceSection}
-          </div>
-        ),
+    <ResumeBody
+      content={{
+        columnOne: () => <div>{experienceSection}</div>,
         columnTwo: () => (
           <div>
             {profileSection}
@@ -156,7 +152,7 @@ const Resume = props => (
           </div>
         )
       }}
-    </ResumeBody>
+    />
 
     <ResumeFooter />
   </div>
