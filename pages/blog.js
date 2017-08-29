@@ -40,12 +40,10 @@ export default class Blog extends React.Component {
         <UL unstyled css={{ margin: 0 }}>
           {posts.map(({ date, slug, title }) => (
             <BlogListItem key={slug}>
-              <LeftColumn>
-                {date}
-              </LeftColumn>
+              <LeftColumn>{date}</LeftColumn>
 
               <RightColumn>
-                <A route="post" params={{ slug }}>
+                <A route="post" params={{ slug }} prefetch>
                   {title}
                 </A>
               </RightColumn>

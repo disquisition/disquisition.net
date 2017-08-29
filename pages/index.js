@@ -31,33 +31,35 @@ export default () => (
         <p>I’m a software engineer based in Chicago, IL.</p>
 
         <p>
-          I’m currently rearchitecting the front-end of
-          {' '}
-          <A href="https://apartments.com" target="_blank">Apartments.com</A>
+          I’m currently rearchitecting the front-end of{' '}
+          <A href="https://apartments.com" target="_blank">
+            Apartments.com
+          </A>
           .
         </p>
 
         <UL inline>
           <li>
-            <span role="img" aria-label="notebook">📓</span>
-            {' '}
-            <A route="blog">
+            <span role="img" aria-label="notebook">
+              📓
+            </span>{' '}
+            <A route="blog" prefetch>
               Blog
             </A>
           </li>
           <li>
-            <span role="img" aria-label="floppy disc">💾</span>
-            {' '}
+            <span role="img" aria-label="floppy disc">
+              💾
+            </span>{' '}
             <A href="https://github.com/disquisition" target="_blank">
               GitHub
             </A>
           </li>
           <li>
-            <span role="img" aria-label="mailbox">📬</span>
-            {' '}
-            <A href="mailto:scisdahl@gmail.com">
-              E-mail
-            </A>
+            <span role="img" aria-label="mailbox">
+              📬
+            </span>{' '}
+            <A href="mailto:scisdahl@gmail.com">E-mail</A>
           </li>
         </UL>
       </Box>
