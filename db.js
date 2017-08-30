@@ -111,8 +111,11 @@ async function indexPosts(dirpath) {
 }
 
 function watchPosts(dirpath) {
+  let queue = Promise.resolve();
   const watcher = sane(dirpath, { glob: ['*.md'] });
-  const cb = () => indexPosts(dirpath);
+  const cb = () => {
+    queue = queue.then(() => indexPosts(dirpath));
+  };
 
   watcher.on('ready', cb);
   watcher.on('change', cb);
