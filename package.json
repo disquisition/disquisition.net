@@ -46,6 +46,7 @@
     "preact-compat": "^3.17.0",
     "prop-types": "^15.5.10",
     "rehype-parse": "^4.0.0",
+    "rxjs": "^5.4.3",
     "sane": "^2.0.0",
     "typeset": "^0.2.2",
     "unified": "^6.1.5",

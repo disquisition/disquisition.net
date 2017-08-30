@@ -1,4 +1,5 @@
 /* eslint-env node */
+const { BehaviorSubject } = require('rxjs/BehaviorSubject');
 const defaultTo = require('lodash/defaultTo');
 const fs = require('fs');
 const path = require('path');
@@ -7,15 +8,21 @@ const sane = require('sane');
 const toPairs = require('lodash/toPairs');
 const util = require('util');
 
+require('rxjs/add/operator/find');
+require('rxjs/add/operator/toPromise');
+
 const parsePost = require('./lib/parse-post');
 
 const readDir = util.promisify(fs.readdir);
 const readFile = util.promisify(fs.readFile);
 
-let _postIndex = {};
 let _allPosts = [];
+let _postIndex = {};
+let _isIndexing$ = new BehaviorSubject(true);
 
-function _runQuery(query = {}) {
+async function _runQuery(query = {}) {
+  await _waitForIndexing();
+
   let posts = _allPosts;
 
   if (query.filter) {
@@ -41,13 +48,17 @@ function _runQuery(query = {}) {
   return posts;
 }
 
+async function _waitForIndexing() {
+  return _isIndexing$.find(i => !i).toPromise();
+}
+
 // public API
 
-function queryAllPosts(query = {}) {
+async function queryAllPosts(query = {}) {
   return _runQuery(query);
 }
 
-function queryPosts(query = {}) {
+async function queryPosts(query = {}) {
   query = Object.assign(query, {
     filter: Object.assign(query.filter || {}, { published: true })
   });
@@ -55,7 +66,9 @@ function queryPosts(query = {}) {
   return _runQuery(query);
 }
 
-function getPost(key, query = {}) {
+async function getPost(key, query = {}) {
+  await _waitForIndexing();
+
   let post = _postIndex[key];
 
   if (query.select) {
@@ -66,6 +79,8 @@ function getPost(key, query = {}) {
 }
 
 async function indexPosts(dirpath) {
+  _isIndexing$.next(true);
+
   const files = (await readDir(dirpath)).filter(file => file.match(/\.md$/));
 
   _postIndex = {};
@@ -91,6 +106,8 @@ async function indexPosts(dirpath) {
 
     return 0;
   });
+
+  _isIndexing$.next(false);
 }
 
 function watchPosts(dirpath) {

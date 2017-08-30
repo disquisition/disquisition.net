@@ -5,8 +5,8 @@ const { getPost, indexPosts, queryPosts, watchPosts } = require('./db');
 
 const api = express();
 
-api.get('/posts', (req, res) => {
-  const posts = queryPosts({
+api.get('/posts', async (req, res) => {
+  const posts = await queryPosts({
     select: ['date', 'slug', 'title']
   });
 
@@ -17,8 +17,8 @@ api.get('/posts', (req, res) => {
   }
 });
 
-api.get('/posts/:slug', (req, res) => {
-  const post = getPost(req.params.slug, {
+api.get('/posts/:slug', async (req, res) => {
+  const post = await getPost(req.params.slug, {
     select: [
       'content',
       'date',
