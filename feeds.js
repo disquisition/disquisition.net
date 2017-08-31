@@ -3,7 +3,7 @@ const express = require('express');
 const max = require('lodash/max');
 const { queryPosts } = require('./db');
 
-async function _getFeed() {
+async function getFeed() {
   const posts = await queryPosts({ limit: 10 });
   const lastUpdated = max(posts.map(p => p.timestamp));
 
@@ -53,21 +53,21 @@ async function _getFeed() {
 const feeds = express();
 
 feeds.get('/atom', async (req, res) => {
-  const feed = await _getFeed();
+  const feed = await getFeed();
 
   res.set('Content-Type', 'text/xml');
   res.send(feed.atom1());
 });
 
 feeds.get('/json', async (req, res) => {
-  const feed = await _getFeed();
+  const feed = await getFeed();
 
   res.set('Content-Type', 'application/json');
   res.send(feed.json1());
 });
 
 feeds.get('/rss', async (req, res) => {
-  const feed = await _getFeed();
+  const feed = await getFeed();
 
   res.set('Content-Type', 'text/xml');
   res.send(feed.rss2());
