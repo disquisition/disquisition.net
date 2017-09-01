@@ -9,6 +9,7 @@ const toPairs = require('lodash/toPairs');
 const util = require('util');
 
 require('rxjs/add/operator/find');
+require('rxjs/add/operator/mapTo');
 require('rxjs/add/operator/toPromise');
 
 const parsePost = require('./lib/parse-post');
@@ -20,10 +21,22 @@ let allPosts = [];
 let postIndex = {};
 let isIndexing = new BehaviorSubject(true);
 
-async function runQuery(query = {}) {
-  await waitForIndexing();
+async function getAllPosts() {
+  return isIndexing
+    .find(i => !i)
+    .mapTo(allPosts)
+    .toPromise();
+}
 
-  let posts = allPosts;
+async function getPostIndex() {
+  return isIndexing
+    .find(i => !i)
+    .mapTo(postIndex)
+    .toPromise();
+}
+
+async function runQuery(query = {}) {
+  let posts = await getAllPosts();
 
   if (query.filter) {
     toPairs(query.filter).forEach(([key, value]) => {
@@ -48,10 +61,6 @@ async function runQuery(query = {}) {
   return posts;
 }
 
-async function waitForIndexing() {
-  return isIndexing.find(i => !i).toPromise();
-}
-
 // public API
 
 async function queryAllPosts(query = {}) {
@@ -67,9 +76,8 @@ async function queryPosts(query = {}) {
 }
 
 async function getPost(key, query = {}) {
-  await waitForIndexing();
-
-  let post = postIndex[key];
+  const index = await getPostIndex();
+  let post = index[key];
 
   if (query.select) {
     post = pick(post, query.select);
@@ -83,8 +91,8 @@ async function indexPosts(dirpath) {
 
   const files = (await readDir(dirpath)).filter(file => file.match(/\.md$/));
 
-  postIndex = {};
-  allPosts = [];
+  const nextPostIndex = {};
+  const nextAllPosts = [];
 
   await Promise.all(
     files.map(async file => {
@@ -92,12 +100,12 @@ async function indexPosts(dirpath) {
       const contents = await readFile(filePath);
       const post = await parsePost(file, contents);
 
-      postIndex[post.slug] = post;
-      allPosts.push(post);
+      nextPostIndex[post.slug] = post;
+      nextAllPosts.push(post);
     })
   );
 
-  allPosts.sort((a, b) => {
+  nextAllPosts.sort((a, b) => {
     if (a.timestamp < b.timestamp) {
       return 1;
     } else if (a.timestamp > b.timestamp) {
@@ -106,6 +114,9 @@ async function indexPosts(dirpath) {
 
     return 0;
   });
+
+  postIndex = nextPostIndex;
+  allPosts = nextAllPosts;
 
   isIndexing.next(false);
 }
