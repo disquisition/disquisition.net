@@ -7,6 +7,9 @@ export default glamorous.h3(
     fontWeight: 'normal',
     textTransform: 'uppercase',
     margin: '0 0 0.5rem',
+    ':not(:first-child)': {
+      marginTop: '1.5rem'
+    },
     '@media print': {
       fontSize: '.85rem',
       margin: '0 0 0.25rem'

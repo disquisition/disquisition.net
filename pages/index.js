@@ -31,9 +31,9 @@ export default () => (
         <p>I’m a software engineer based in Chicago, IL.</p>
 
         <p>
-          I’m currently rearchitecting the front-end of{' '}
-          <A href="https://apartments.com" target="_blank">
-            Apartments.com
+          I’m currently engineering{' '}
+          <A href="https://conversantmedia.com" target="_blank">
+            Conversant
           </A>
           .
         </p>

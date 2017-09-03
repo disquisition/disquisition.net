@@ -72,7 +72,7 @@ const skillsSection = (
 const experienceSection = (
   <Section title="Experience">
     <Subheading>CoStar Group, Inc. (Apartments.com)</Subheading>
-    <JobDescription>Software Developer | Jan 2015–Present</JobDescription>
+    <JobDescription>Software Developer | Jan 2015–Sept 2017</JobDescription>
     <List>
       <li>
         Played key role in advocating for the improvement of our front-end

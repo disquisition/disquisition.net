@@ -5,7 +5,7 @@ import glamorous, { Div } from 'glamorous';
 
 const Logo = glamorous.span({
   display: 'inline-block',
-  padding: '.0625em .5em .3em',
+  padding: '.125em .5em .3em',
   marginBottom: '1em',
   border: '2px solid black',
   color: 'black',
