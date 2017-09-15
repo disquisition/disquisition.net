@@ -27,7 +27,7 @@ const CaptionLink = glamorous(A)({
 const StyledHeroImage = glamorous
   .div(
     ({ src }) =>
-      (src
+      src
         ? {
           '&:before': {
             content: ' ',
@@ -42,7 +42,7 @@ const StyledHeroImage = glamorous
             animation: `${fadeIn} .25s linear`
           }
         }
-        : {}),
+        : {},
     {
       position: 'relative',
       width: 720,
@@ -88,9 +88,11 @@ class HeroImage extends React.Component {
     const { src, ...rest } = this.props;
     const { isImageLoaded } = this.state;
 
-    return isImageLoaded
-      ? <StyledHeroImage {...rest} src={src} />
-      : <StyledHeroImage {...rest} />;
+    return isImageLoaded ? (
+      <StyledHeroImage {...rest} src={src} />
+    ) : (
+      <StyledHeroImage {...rest} />
+    );
   }
 }
 
@@ -102,17 +104,14 @@ const PostHeroImage = ({ className, image }) => (
     />
 
     <Caption>
-      Photo by
-      {' '}
+      Photo by{' '}
       <CaptionLink
         href={`${image.user.link}?${unsplashQueryParams}`}
         target="_blank"
       >
         {image.user.name}
-      </CaptionLink>
-      {' '}
-      /
-      {' '}
+      </CaptionLink>{' '}
+      /{' '}
       <CaptionLink
         href={`https://unsplash.com/?${unsplashQueryParams}`}
         target="_blank"

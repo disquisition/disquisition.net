@@ -5,13 +5,9 @@ import glamorous from 'glamorous';
 
 const Section = ({ children, className, title }) => (
   <div className={className}>
-    <SectionHeading>
-      {title}
-    </SectionHeading>
+    <SectionHeading>{title}</SectionHeading>
 
-    <SectionBody>
-      {children}
-    </SectionBody>
+    <SectionBody>{children}</SectionBody>
   </div>
 );
 

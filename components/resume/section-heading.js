@@ -22,9 +22,7 @@ const SectionHeadingText = glamorous.span(
 
 const SectionHeading = ({ children, ...props }) => (
   <h2 {...props}>
-    <SectionHeadingText>
-      {children}
-    </SectionHeadingText>
+    <SectionHeadingText>{children}</SectionHeadingText>
   </h2>
 );
 

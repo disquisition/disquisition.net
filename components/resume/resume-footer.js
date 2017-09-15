@@ -19,8 +19,7 @@ export default () => (
   <BuiltWithWrapper>
     <Line>This document was built with React</Line>
     <Line>
-      Check it out on the web at
-      {' '}
+      Check it out on the web at{' '}
       <TextLink href="https://disquisition.net/resume">
         disquisition.net/resume
       </TextLink>

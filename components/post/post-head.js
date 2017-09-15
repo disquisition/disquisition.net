@@ -47,7 +47,8 @@ const PostHead = ({ post }) => {
               '@type': 'Organization',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://disquisition.net/static/images/disquisition-net-logo.jpg',
+                url:
+                  'https://disquisition.net/static/images/disquisition-net-logo.jpg',
                 width: 249,
                 height: 60
               },

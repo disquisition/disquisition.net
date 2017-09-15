@@ -17,7 +17,11 @@ const styles = [
 const WrappedAnchor = ({ children, ...props }) => {
   const rel = props.target === '_blank' ? 'noopener noreferrer' : null;
 
-  return <a rel={rel} {...props}>{children}</a>;
+  return (
+    <a rel={rel} {...props}>
+      {children}
+    </a>
+  );
 };
 
 WrappedAnchor.propTypes = {
@@ -32,9 +36,7 @@ export const StyledAnchor = glamorous(WrappedAnchor, { rootEl: 'a' })(
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const WrappedLink = ({ children, className, ...props }) => (
   <RouterLink {...props}>
-    <a className={className}>
-      {children}
-    </a>
+    <a className={className}>{children}</a>
   </RouterLink>
 );
 /* eslint-enable jsx-a11y/anchor-is-valid */
