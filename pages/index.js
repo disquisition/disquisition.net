@@ -1,4 +1,5 @@
 import A from '../components/anchor';
+import Head from 'next/head';
 import Page from '../layouts/main';
 import UL from '../components/unordered-list';
 import glamorous from 'glamorous';
@@ -24,6 +25,10 @@ const Center = glamorous.div({
 
 export default () => (
   <Page>
+    <Head>
+      <link rel="canonical" href="https://disquisition.net/" />
+    </Head>
+
     <Center>
       <Box>
         <p>My name is Spenser Isdahl.</p>
