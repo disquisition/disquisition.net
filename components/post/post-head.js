@@ -8,6 +8,7 @@ const PostHead = ({ post }) => {
     <Head>
       <title>{post.title}</title>
       <link rel="canonical" href={canonical} />
+      <meta name="description" content={post.description} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@disquisition" />
