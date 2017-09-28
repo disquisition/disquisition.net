@@ -33,6 +33,7 @@ const PostHead = ({ post }) => {
             mainEntityOfPage: canonical,
             headline: post.title,
             datePublished: new Date(post.timestamp).toISOString(),
+            description: post.description,
             image: {
               '@type': 'ImageObject',
               url: post.image.link,
