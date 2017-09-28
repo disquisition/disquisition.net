@@ -4,6 +4,10 @@ import Page from '../layouts/main';
 import UL from '../components/unordered-list';
 import glamorous from 'glamorous';
 
+const canonical = 'https://disquisition.net/';
+const description =
+  'My name is Spenser Isdahl. I’m a software engineer based in Chicago, IL. I’m currently engineering Conversant.';
+
 const Box = glamorous.div({
   padding: '1em 2em',
   backgroundColor: 'lightcyan',
@@ -26,7 +30,20 @@ const Center = glamorous.div({
 export default () => (
   <Page>
     <Head>
-      <link rel="canonical" href="https://disquisition.net/" />
+      <link rel="canonical" href={canonical} />
+      <meta name="description" content={description} />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'http://schema.org',
+            '@type': 'WebSite',
+            url: canonical,
+            description: description
+          })
+        }}
+      />
     </Head>
 
     <Center>
