@@ -1,4 +1,5 @@
 /* eslint-env node */
+const compression = require('compression');
 const express = require('express');
 const next = require('next');
 
@@ -16,6 +17,8 @@ const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
   const server = express();
+
+  server.use(compression());
 
   server.get(`/${gsv}`, (req, res) => {
     res.send(`google-site-verification: ${gsv}`);
