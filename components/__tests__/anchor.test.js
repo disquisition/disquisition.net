@@ -1,13 +1,13 @@
 /* eslint-env jest */
 import React from 'react';
 import A, { StyledAnchor, StyledLink } from '../anchor';
-import { mount, render } from 'enzyme';
+import { mount } from 'enzyme';
 
 const mockedTheme = { main: { color: 'MOCKED_COLOR' } };
 
 describe('Anchor component', () => {
   it('renders external link correctly', () => {
-    const wrapper = render(
+    const wrapper = mount(
       <A href="https://google.com" theme={mockedTheme}>
         Anchor text
       </A>
@@ -24,7 +24,7 @@ describe('Anchor component', () => {
   });
 
   it('renders external link with `target="_blank"` correctly', () => {
-    const wrapper = render(
+    const wrapper = mount(
       <A href="https://google.com" target="_blank" theme={mockedTheme}>
         Anchor text
       </A>
@@ -43,7 +43,7 @@ describe('Anchor component', () => {
   });
 
   it('renders URL fragment correctly', () => {
-    const wrapper = render(
+    const wrapper = mount(
       <A href="#fragment" theme={mockedTheme}>
         Anchor text
       </A>
@@ -60,7 +60,7 @@ describe('Anchor component', () => {
   });
 
   it('renders internal link with `route` correctly', () => {
-    const wrapper = render(
+    const wrapper = mount(
       <A route="about" theme={mockedTheme}>
         Anchor text
       </A>
