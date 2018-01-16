@@ -8,17 +8,8 @@ const createElementFactory = (aliases = {}) => (name, attrs, children) => {
   return React.createElement(component || name, attrs, children);
 };
 
-const PostBody = ({ aliases, hast }) => {
-  // toH requires an element at the HAST root
-  if (hast.type === 'root') {
-    hast = Object.assign({}, hast, {
-      type: 'element',
-      tagName: 'div'
-    });
-  }
-
-  return toH(createElementFactory(aliases), hast);
-};
+const PostBody = ({ aliases, hast }) =>
+  toH(createElementFactory(aliases), hast);
 
 PostBody.propTypes = {
   aliases: PropTypes.object,
