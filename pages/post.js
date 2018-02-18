@@ -11,6 +11,7 @@ import SectionHeader from '../components/post/section-header';
 import P from '../components/paragraph';
 import PropTypes from 'prop-types';
 import React from 'react';
+import redirectTo from '../lib/redirect-to';
 import Sup from '../components/superscript';
 import fetch from 'isomorphic-unfetch';
 import getOrigin from '../lib/get-origin';
@@ -27,11 +28,18 @@ const componentAliases = {
 };
 
 export default class Post extends React.Component {
-  static async getInitialProps({ query: { slug }, req }) {
-    const res = await fetch(`${getOrigin(req)}/api/posts/${slug}`);
-    const post = await res.json();
+  static async getInitialProps({ query: { slug }, req, res }) {
+    if (slug) {
+      const postRes = await fetch(`${getOrigin(req)}/api/posts/${slug}`);
+      const post = await postRes.json();
 
-    return { post };
+      return { post };
+    } else {
+      // If we don't have a slug, redirect back to the post list
+      redirectTo(res, '/blog');
+
+      return {};
+    }
   }
 
   static propTypes = {
@@ -51,13 +59,13 @@ export default class Post extends React.Component {
       slug: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       timestamp: PropTypes.number.isRequired
-    }).isRequired
+    })
   };
 
   render() {
     const { post } = this.props;
 
-    return (
+    return post ? (
       <Page>
         <PostHead post={post} />
 
@@ -79,6 +87,6 @@ export default class Post extends React.Component {
           </Article>
         </Div>
       </Page>
-    );
+    ) : null;
   }
 }
