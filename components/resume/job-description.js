@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export default glamorous.p({
+const JobDescription = glamorous.p({
   fontSize: '0.8rem',
   letterSpacing: '0.1rem',
   textTransform: 'uppercase',
@@ -10,3 +10,5 @@ export default glamorous.p({
     marginBottom: '0.5rem'
   }
 });
+
+export default JobDescription;

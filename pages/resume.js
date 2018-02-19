@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Page from '../layouts/base';
 import Resume from '../components/resume';
 
-export default () => (
+const ResumePage = () => (
   <Page>
     <Head>
       <title>Spenser Isdahl’s résumé</title>
@@ -16,3 +16,5 @@ export default () => (
     <Resume />
   </Page>
 );
+
+export default ResumePage;

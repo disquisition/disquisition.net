@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export default glamorous.section(
+const SectionBody = glamorous.section(
   {
     paddingLeft: '1.25rem',
     borderLeftWidth: 3,
@@ -20,3 +20,5 @@ export default glamorous.section(
     borderLeftColor: theme.resume.colors.highlight
   })
 );
+
+export default SectionBody;

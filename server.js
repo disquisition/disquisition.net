@@ -15,10 +15,19 @@ const gsv = `${process.env.GOOGLE_SITE_VERIFICATION}.html`;
 const app = next({ dev });
 const handler = routes.getRequestHandler(app);
 
+const filter = (req, res) => {
+  // Next.js sends map files as text/html
+  if (req.path.endsWith('.map')) {
+    return false;
+  }
+
+  return compression.filter(req, res);
+};
+
 app.prepare().then(() => {
   const server = express();
 
-  server.use(compression());
+  server.use(compression({ filter }));
 
   server.get(`/${gsv}`, (req, res) => {
     res.send(`google-site-verification: ${gsv}`);

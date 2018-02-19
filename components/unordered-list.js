@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export default glamorous.ul(({ inline, unstyled }) => ({
+const UnorderedList = glamorous.ul(({ inline, unstyled }) => ({
   paddingLeft: inline || unstyled ? '0' : '2em',
   listStyleType: inline || unstyled ? 'none' : 'disc',
   ' li': {
@@ -11,3 +11,5 @@ export default glamorous.ul(({ inline, unstyled }) => ({
     }
   }
 }));
+
+export default UnorderedList;

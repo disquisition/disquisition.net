@@ -1,3 +1,5 @@
 import glamorous from 'glamorous';
 
-export default glamorous.p({ margin: 0 });
+const Line = glamorous.p({ margin: 0 });
+
+export default Line;

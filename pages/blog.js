@@ -14,7 +14,7 @@ const LeftColumn = glamorous(RightColumn)({
   marginRight: '1em'
 });
 
-export default class Blog extends React.Component {
+export default class BlogPage extends React.Component {
   static async getInitialProps({ req }) {
     const res = await fetch(`${getOrigin(req)}/api/posts`);
     const posts = await res.json();

@@ -7,7 +7,7 @@ import PostHead from '../components/post/post-head';
 import PostHeader from '../components/post/post-header';
 import PostHeroImage from '../components/post/post-hero-image';
 import PostFooter from '../components/post/post-footer';
-import SectionHeader from '../components/post/section-header';
+import SectionHeading from '../components/post/section-heading';
 import P from '../components/paragraph';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -21,13 +21,13 @@ const componentAliases = {
   a: A,
   code: Code,
   h1: () => null, // This gets rendered in the PostHeader instead
-  h2: SectionHeader,
+  h2: SectionHeading,
   hr: Hr,
   p: P,
   sup: Sup
 };
 
-export default class Post extends React.Component {
+export default class PostPage extends React.Component {
   static async getInitialProps({ query: { slug }, req, res }) {
     if (slug) {
       const postRes = await fetch(`${getOrigin(req)}/api/posts/${slug}`);

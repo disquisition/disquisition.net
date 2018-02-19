@@ -27,7 +27,7 @@ const Center = glamorous.div({
   justifyContent: 'center'
 });
 
-export default () => (
+const AboutPage = () => (
   <Page>
     <Head>
       <link rel="canonical" href={canonical} />
@@ -88,3 +88,5 @@ export default () => (
     </Center>
   </Page>
 );
+
+export default AboutPage;

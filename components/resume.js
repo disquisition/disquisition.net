@@ -137,8 +137,24 @@ const experienceSection = (
   </Section>
 );
 
+const ResumeWrapper = glamorous.div(
+  {
+    margin: 'auto',
+    width: '50rem',
+    maxWidth: '90%',
+    '@media print': {
+      fontSize: '12px',
+      width: '100%',
+      maxWidth: '100%'
+    }
+  },
+  ({ theme }) => ({
+    color: theme.resume.colors.text
+  })
+);
+
 const Resume = props => (
-  <div {...props}>
+  <ResumeWrapper {...props}>
     <ResumeHeader />
 
     <ResumeBody
@@ -155,21 +171,7 @@ const Resume = props => (
     />
 
     <ResumeFooter />
-  </div>
+  </ResumeWrapper>
 );
 
-export default glamorous(Resume, { rootEl: 'div' })(
-  {
-    margin: 'auto',
-    width: '50rem',
-    maxWidth: '90%',
-    '@media print': {
-      fontSize: '12px',
-      width: '100%',
-      maxWidth: '100%'
-    }
-  },
-  ({ theme }) => ({
-    color: theme.resume.colors.text
-  })
-);
+export default Resume;

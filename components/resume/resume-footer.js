@@ -15,7 +15,7 @@ const BuiltWithWrapper = glamorous.div(
   })
 );
 
-export default () => (
+const ResumeFooter = () => (
   <BuiltWithWrapper>
     <Line>This document was built with React</Line>
     <Line>
@@ -26,3 +26,5 @@ export default () => (
     </Line>
   </BuiltWithWrapper>
 );
+
+export default ResumeFooter;

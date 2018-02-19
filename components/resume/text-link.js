@@ -1,5 +1,7 @@
 import glamorous from 'glamorous';
 
-export default glamorous.a(({ theme }) => ({
+const TextLink = glamorous.a(({ theme }) => ({
   color: theme.resume.colors.text
 }));
+
+export default TextLink;

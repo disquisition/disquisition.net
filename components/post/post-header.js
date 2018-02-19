@@ -19,21 +19,22 @@ const PostHeading = glamorous
     id: toId(children)
   }));
 
-const PostHeader = ({ children, className, date }) => (
-  <header className={className}>
+const StyledHeader = glamorous.header(({ theme }) => ({
+  color: theme.main.color,
+  lineHeight: 1.4
+}));
+
+const PostHeader = ({ children, date }) => (
+  <StyledHeader>
     <PostHeading>{children}</PostHeading>
 
     <span>{date}</span>
-  </header>
+  </StyledHeader>
 );
 
 PostHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
   date: PropTypes.string.isRequired
 };
 
-export default glamorous(PostHeader)(({ theme }) => ({
-  color: theme.main.color,
-  lineHeight: 1.4
-}));
+export default PostHeader;

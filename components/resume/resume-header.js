@@ -2,12 +2,14 @@ import Line from './line';
 import TextLink from './text-link';
 import glamorous from 'glamorous';
 
-const StarBar = glamorous(props => <Line {...props}>✶ ✶ ✶ ✶</Line>)(
+const StyledHeader = glamorous.header(
   {
-    fontSize: '1.5em'
+    textAlign: 'center',
+    marginBottom: '2rem'
   },
   ({ theme }) => ({
-    color: theme.resume.colors.highlight
+    color: theme.resume.colors.strong,
+    fontFamily: theme.resume.fonts.mono
   })
 );
 
@@ -20,8 +22,17 @@ const ResumeHeading = glamorous.h1({
   }
 });
 
-const ResumeHeader = props => (
-  <header {...props}>
+const StarBar = glamorous(props => <Line {...props}>✶ ✶ ✶ ✶</Line>)(
+  {
+    fontSize: '1.5em'
+  },
+  ({ theme }) => ({
+    color: theme.resume.colors.highlight
+  })
+);
+
+const ResumeHeader = () => (
+  <StyledHeader>
     <ResumeHeading>Spenser Isdahl</ResumeHeading>
 
     <StarBar />
@@ -37,16 +48,7 @@ const ResumeHeader = props => (
     </Line>
     <Line>scisdahl@gmail.com</Line>
     <Line>{process.env.PHONE_NUMBER}</Line>
-  </header>
+  </StyledHeader>
 );
 
-export default glamorous(ResumeHeader, { rootEl: 'header' })(
-  {
-    textAlign: 'center',
-    marginBottom: '2rem'
-  },
-  ({ theme }) => ({
-    color: theme.resume.colors.strong,
-    fontFamily: theme.resume.fonts.mono
-  })
-);
+export default ResumeHeader;

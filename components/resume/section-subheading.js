@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export default glamorous.h3(
+const SectionSubheading = glamorous.h3(
   {
     fontSize: '1rem',
     letterSpacing: '0.1rem',
@@ -19,3 +19,5 @@ export default glamorous.h3(
     color: theme.resume.colors.strong
   })
 );
+
+export default SectionSubheading;

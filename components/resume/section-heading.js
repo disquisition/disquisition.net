@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { css } from 'glamor';
 
 const SectionHeadingText = glamorous.span(
   {
@@ -20,19 +21,7 @@ const SectionHeadingText = glamorous.span(
   })
 );
 
-const SectionHeading = ({ children, ...props }) => (
-  <h2 {...props}>
-    <SectionHeadingText>{children}</SectionHeadingText>
-  </h2>
-);
-
-SectionHeading.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
-export default glamorous(SectionHeading, {
-  rootEl: 'h2'
-})({
+const styling = css({
   margin: 0,
   marginBottom: '-1.2rem',
   textAlign: 'right',
@@ -47,3 +36,15 @@ export default glamorous(SectionHeading, {
     transform: 'translate(calc(-100% + .6rem), -1rem) rotate(-90deg)'
   }
 });
+
+const SectionHeading = ({ children, ...props }) => (
+  <h2 {...styling} {...props}>
+    <SectionHeadingText>{children}</SectionHeadingText>
+  </h2>
+);
+
+SectionHeading.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default SectionHeading;

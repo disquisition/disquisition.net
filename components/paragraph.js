@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export default glamorous.p(
+const Paragraph = glamorous.p(
   {
     margin: '1em 0'
   },
@@ -8,3 +8,5 @@ export default glamorous.p(
     textAlign: center ? 'center' : 'left'
   })
 );
+
+export default Paragraph;

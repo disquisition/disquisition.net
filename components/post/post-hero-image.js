@@ -97,7 +97,7 @@ class HeroImage extends React.Component {
 }
 
 const PostHeroImage = ({ className, image }) => (
-  <div className={className}>
+  <div {...css({ margin: '1em 0' })} className={className}>
     <HeroImage
       src={image.link}
       alt={`Photo by ${image.user.name} / Unsplash`}
@@ -133,6 +133,4 @@ PostHeroImage.propTypes = {
   }).isRequired
 };
 
-export default glamorous(PostHeroImage)({
-  margin: '1em 0'
-});
+export default PostHeroImage;

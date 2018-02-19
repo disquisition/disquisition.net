@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export default glamorous.ul({
+const List = glamorous.ul({
   listStyleType: 'square',
   paddingLeft: '1rem',
   ' li': {
@@ -13,3 +13,5 @@ export default glamorous.ul({
     }
   }
 });
+
+export default List;

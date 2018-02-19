@@ -11,6 +11,10 @@ import { ThemeProvider } from 'glamorous';
 // '__NEXT_DATA__.ids' is set in '_document.js'
 if (typeof window !== 'undefined') {
   rehydrate(window.__NEXT_DATA__.glamor_cache);
+
+  Router.onRouteChangeStart = () => NProgress.start();
+  Router.onRouteChangeComplete = () => NProgress.done();
+  Router.onRouteChangeError = () => NProgress.done();
 }
 
 css.global('*', { boxSizing: 'border-box' });
@@ -42,10 +46,6 @@ css.global('#nprogress .peg', {
   opacity: 1,
   transform: 'rotate(3deg) translate(0px, -4px)'
 });
-
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
 
 const BaseLayout = ({ children }) => (
   <ThemeProvider theme={themes}>
