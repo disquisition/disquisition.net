@@ -1,5 +1,6 @@
 /* eslint-env node */
-const { BehaviorSubject } = require('rxjs/BehaviorSubject');
+const { BehaviorSubject } = require('rxjs');
+const { find, mapTo } = require('rxjs/operators');
 const defaultTo = require('lodash/defaultTo');
 const fs = require('fs');
 const path = require('path');
@@ -8,10 +9,6 @@ const sane = require('sane');
 const toPairs = require('lodash/toPairs');
 const util = require('util');
 
-require('rxjs/add/operator/find');
-require('rxjs/add/operator/mapTo');
-require('rxjs/add/operator/toPromise');
-
 const parsePost = require('./lib/parse-post');
 
 const readDir = util.promisify(fs.readdir);
@@ -19,20 +16,14 @@ const readFile = util.promisify(fs.readFile);
 
 let allPosts = [];
 let postIndex = {};
-let isIndexing = new BehaviorSubject(true);
+let isIndexing$ = new BehaviorSubject(true);
 
 async function getAllPosts() {
-  return isIndexing
-    .find(i => !i)
-    .mapTo(allPosts)
-    .toPromise();
+  return isIndexing$.pipe(find(i => !i), mapTo(allPosts)).toPromise();
 }
 
 async function getPostIndex() {
-  return isIndexing
-    .find(i => !i)
-    .mapTo(postIndex)
-    .toPromise();
+  return isIndexing$.pipe(find(i => !i), mapTo(postIndex)).toPromise();
 }
 
 async function runQuery(query = {}) {
@@ -87,7 +78,7 @@ async function getPost(key, query = {}) {
 }
 
 async function indexPosts(dirpath) {
-  isIndexing.next(true);
+  isIndexing$.next(true);
 
   const files = (await readDir(dirpath)).filter(file => file.match(/\.md$/));
 
@@ -118,7 +109,7 @@ async function indexPosts(dirpath) {
   postIndex = nextPostIndex;
   allPosts = nextAllPosts;
 
-  isIndexing.next(false);
+  isIndexing$.next(false);
 }
 
 function watchPosts(dirpath) {

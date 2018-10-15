@@ -1,11 +1,10 @@
 {
-  "plugins": ["transform-react-constant-elements"],
+  "plugins": ["@babel/plugin-transform-react-constant-elements"],
   "env": {
     "development": {
       "plugins": [
         "add-react-displayname",
-        "glamorous-displayname",
-        "transform-react-jsx-self"
+        "@babel/plugin-transform-react-jsx-self"
       ],
       "presets": ["next/babel"]
     },
@@ -13,7 +12,14 @@
       "presets": ["next/babel"]
     },
     "test": {
-      "presets": [["env", { "modules": "commonjs" }], "next/babel"]
+      "presets": [
+        [
+          "next/babel",
+          {
+            "preset-env": { "modules": "commonjs" }
+          }
+        ]
+      ]
     }
   }
 }

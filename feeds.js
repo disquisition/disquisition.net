@@ -1,4 +1,4 @@
-const Feed = require('feed');
+const { Feed } = require('feed');
 const express = require('express');
 const max = require('lodash/max');
 const { queryPosts } = require('./db');
