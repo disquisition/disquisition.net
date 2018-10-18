@@ -1,12 +1,8 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const Paragraph = glamorous.p(
-  {
-    margin: '1em 0'
-  },
-  ({ center }) => ({
-    textAlign: center ? 'center' : 'left'
-  })
-);
+const Paragraph = styled.p`
+  margin: 1em 0;
+  text-align: ${props => (props.center ? 'center' : 'left')};
+`;
 
 export default Paragraph;

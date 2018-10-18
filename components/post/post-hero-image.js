@@ -1,75 +1,98 @@
 import A from '../anchor';
 import PropTypes from 'prop-types';
 import React from 'react';
-import glamorous from 'glamorous';
-import { css } from 'glamor';
+import styled, { css, cx, keyframes } from 'react-emotion';
 
 const captionColor = '#bbb';
 const unsplashQueryParams =
   'utm_source=disquisition&utm_medium=referral&utm_content=creditCopyText';
 
-const fadeIn = css.keyframes({
-  '0%': { opacity: 0 },
-  '100%': { opacity: 1 }
-});
+const fadeIn = keyframes`
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+`;
 
-const Caption = glamorous.p({
-  color: captionColor,
-  textAlign: 'center',
-  margin: 0,
-  marginTop: '.5em'
-});
+const baseHeroImageStyle = css`
+  position: relative;
+  width: 720px;
+  height: 360px;
+  max-width: 100%;
+  background: #eee;
+  margin: auto;
 
-const CaptionLink = glamorous(A)({
-  color: captionColor
-});
+  @media screen and (max-width: 720px) {
+    height: 240px;
+  }
 
-const StyledHeroImage = glamorous
-  .div(
-    ({ src }) =>
-      src
-        ? {
-          '&:before': {
-            content: ' ',
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            background: `url(${src})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            animation: `${fadeIn} .25s linear`
-          }
-        }
-        : {},
-    {
-      position: 'relative',
-      width: 720,
-      height: 360,
-      maxWidth: '100%',
-      background: '#eee',
-      margin: 'auto',
-      '@media screen and (max-width: 720px)': {
-        height: 240
-      },
-      '@media screen and (max-width: 480px)': {
-        height: 180
-      }
+  @media screen and (max-width: 480px) {
+    height: 180px;
+  }
+`;
+
+function HeroImage(props) {
+  const { alt, src, ...rest } = props;
+
+  if (!src) {
+    return (
+      <div
+        role="img"
+        aria-label={alt}
+        className={baseHeroImageStyle}
+        {...rest}
+      />
+    );
+  }
+
+  const heroImageStyle = css`
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url(${src});
+      background-position: center;
+      background-size: cover;
+      animation: ${fadeIn} 0.25s linear;
     }
-  )
-  .withProps(
-    ({ alt }) => ({
-      'aria-label': alt
-    }),
-    {
-      role: 'img'
-    }
+  `;
+
+  return (
+    <div
+      role="img"
+      aria-label={alt}
+      className={cx(baseHeroImageStyle, heroImageStyle)}
+      {...rest}
+    />
   );
+}
 
-class HeroImage extends React.Component {
+const HeroImageContainer = styled.div`
+  margin: 1em 0;
+`;
+
+const Caption = styled.p`
+  color: ${captionColor};
+  text-align: center;
+  margin: 0;
+  margin-top: 0.5em;
+`;
+
+const CaptionLink = styled(A)`
+  color: ${captionColor};
+`;
+
+export default class PostHeroImage extends React.Component {
   static propTypes = {
-    src: PropTypes.string.isRequired
+    className: PropTypes.string,
+    image: PropTypes.shape({
+      link: PropTypes.string.isRequired,
+      user: PropTypes.shape({
+        link: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired
   };
 
   state = {
@@ -81,56 +104,37 @@ class HeroImage extends React.Component {
 
     image.onload = () => this.setState({ isImageLoaded: true });
 
-    image.src = this.props.src;
+    image.src = this.props.image.link;
   }
 
   render() {
-    const { src, ...rest } = this.props;
+    const { className, image } = this.props;
     const { isImageLoaded } = this.state;
 
-    return isImageLoaded ? (
-      <StyledHeroImage {...rest} src={src} />
-    ) : (
-      <StyledHeroImage {...rest} />
+    return (
+      <HeroImageContainer className={className}>
+        <HeroImage
+          src={isImageLoaded && image.link}
+          alt={`Photo by ${image.user.name} / Unsplash`}
+        />
+
+        <Caption>
+          {'Photo by '}
+          <CaptionLink
+            href={`${image.user.link}?${unsplashQueryParams}`}
+            target="_blank"
+          >
+            {image.user.name}
+          </CaptionLink>
+          {' / '}
+          <CaptionLink
+            href={`https://unsplash.com/?${unsplashQueryParams}`}
+            target="_blank"
+          >
+            Unsplash
+          </CaptionLink>
+        </Caption>
+      </HeroImageContainer>
     );
   }
 }
-
-const PostHeroImage = ({ className, image }) => (
-  <div {...css({ margin: '1em 0' })} className={className}>
-    <HeroImage
-      src={image.link}
-      alt={`Photo by ${image.user.name} / Unsplash`}
-    />
-
-    <Caption>
-      Photo by{' '}
-      <CaptionLink
-        href={`${image.user.link}?${unsplashQueryParams}`}
-        target="_blank"
-      >
-        {image.user.name}
-      </CaptionLink>{' '}
-      /{' '}
-      <CaptionLink
-        href={`https://unsplash.com/?${unsplashQueryParams}`}
-        target="_blank"
-      >
-        Unsplash
-      </CaptionLink>
-    </Caption>
-  </div>
-);
-
-PostHeroImage.propTypes = {
-  className: PropTypes.string,
-  image: PropTypes.shape({
-    link: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      link: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
-};
-
-export default PostHeroImage;

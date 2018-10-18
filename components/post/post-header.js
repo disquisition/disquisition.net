@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import { css, cx } from 'emotion';
+import themes from '../../themes';
 
 function toId(children) {
   return typeof children === 'string'
@@ -10,31 +11,30 @@ function toId(children) {
     : null;
 }
 
-const PostHeading = glamorous
-  .h1({
-    marginTop: '1rem',
-    marginBottom: 0
-  })
-  .withProps(({ children }) => ({
-    id: toId(children)
-  }));
+export const postHeaderStyle = css`
+  color: ${themes.main.color};
+  line-height: 1.4;
 
-const StyledHeader = glamorous.header(({ theme }) => ({
-  color: theme.main.color,
-  lineHeight: 1.4
-}));
+  .heading {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+`;
 
-const PostHeader = ({ children, date }) => (
-  <StyledHeader>
-    <PostHeading>{children}</PostHeading>
+export default function PostHeader({ children, className, date, ...props }) {
+  return (
+    <header className={cx(postHeaderStyle, className)} {...props}>
+      <h1 id={toId(children)} className="heading">
+        {children}
+      </h1>
 
-    <span>{date}</span>
-  </StyledHeader>
-);
+      <span>{date}</span>
+    </header>
+  );
+}
 
 PostHeader.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   date: PropTypes.string.isRequired
 };
-
-export default PostHeader;

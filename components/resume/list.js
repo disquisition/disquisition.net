@@ -1,17 +1,20 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const List = glamorous.ul({
-  listStyleType: 'square',
-  paddingLeft: '1rem',
-  ' li': {
-    marginBottom: '0.5rem',
-    ':last-child': {
-      marginBottom: 0
-    },
-    '@media print': {
-      marginBottom: '0.25rem'
+const List = styled.ul`
+  list-style-type: square;
+  padding-left: 1rem;
+
+  li {
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media print {
+      margin-bottom: 0.25rem;
     }
   }
-});
+`;
 
 export default List;

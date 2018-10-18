@@ -3,64 +3,66 @@ import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
 import themes from '../themes';
 import { Router } from '../routes';
-import { css, rehydrate } from 'glamor';
-import { ThemeProvider } from 'glamorous';
+import { hydrate, injectGlobal } from 'emotion';
 
-// Adds server generated styles to glamor cache.
-// Has to run before any `style()` calls
-// '__NEXT_DATA__.ids' is set in '_document.js'
+// Adds server generated styles to emotion cache. Has to run before any
+// `style()` calls. `__NEXT_DATA__.emotion_cache` is set in `_document.js`.
 if (typeof window !== 'undefined') {
-  rehydrate(window.__NEXT_DATA__.glamor_cache);
+  hydrate(window.__NEXT_DATA__.emotion_cache);
 
   Router.onRouteChangeStart = () => NProgress.start();
   Router.onRouteChangeComplete = () => NProgress.done();
   Router.onRouteChangeError = () => NProgress.done();
 }
 
-css.global('*', { boxSizing: 'border-box' });
-css.global('body', {
-  padding: '1em 2em',
-  margin: 0,
-  font: `${themes.main.fontSize}px ${themes.main.fontFamily}`,
-  WebkitFontSmoothing: 'antialiased'
-});
-css.global('#nprogress', {
-  pointerEvents: 'none'
-});
-css.global('#nprogress .bar', {
-  background: themes.main.color,
-  position: 'fixed',
-  zIndex: 1031,
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '2px'
-});
-css.global('#nprogress .peg', {
-  display: 'block',
-  position: 'absolute',
-  right: '0px',
-  width: '100px',
-  height: '100%',
-  boxShadow: `0 0 10px ${themes.main.color}, 0 0 5px ${themes.main.color}`,
-  opacity: 1,
-  transform: 'rotate(3deg) translate(0px, -4px)'
-});
+injectGlobal`
+  * { box-sizing: border-box; }
 
-const BaseLayout = ({ children }) => (
-  <ThemeProvider theme={themes}>
-    <div>
+  body {
+    padding: 1em 2em;
+    margin: 0;
+    font: ${themes.main.fontSize}px ${themes.main.fontFamily};
+    -webkit-font-smoothing: antialiased
+  }
+
+  #nprogress { pointer-events: none; }
+
+  #nprogress .bar {
+    background: ${themes.main.color};
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+
+  #nprogress .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px ${themes.main.color}, 0 0 5px ${themes.main.color};
+    opacity: 1;
+    transform: rotate(3deg) translate(0px, -4px);
+  }
+`;
+
+export default function BaseLayout({ children }) {
+  return (
+    <>
       <Head>
         <title>disquisition.net</title>
       </Head>
 
+      {/* <ThemeProvider theme={themes}> */}
       {children}
-    </div>
-  </ThemeProvider>
-);
+      {/* </ThemeProvider> */}
+    </>
+  );
+}
 
 BaseLayout.propTypes = {
   children: PropTypes.node.isRequired
 };
-
-export default BaseLayout;

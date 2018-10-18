@@ -1,44 +1,43 @@
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import { css, cx } from 'emotion';
 import isRelativeUrl from 'is-relative-url';
 import isUrlFragment from '../lib/is-url-fragment';
 import { Link as RouterLink } from '../routes';
+import themes from '../themes';
 
-const styles = [
-  {
-    textDecoration: 'none',
-    ':hover': { textDecoration: 'underline' }
-  },
-  ({ theme }) => ({
-    color: theme.main.color
-  })
-];
+const anchorStyle = css`
+  text-decoration: none;
+  color: ${themes.main.color};
 
-const WrappedAnchor = ({ children, ...props }) => {
+  &:hover {
+    text-decoratio: underline;
+  }
+`;
+
+function WrappedAnchor({ children, className, ...props }) {
   const rel = props.target === '_blank' ? 'noopener noreferrer' : null;
 
   return (
-    <a rel={rel} {...props}>
+    <a rel={rel} className={cx(anchorStyle, className)} {...props}>
       {children}
     </a>
   );
-};
+}
 
 WrappedAnchor.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   target: PropTypes.string
 };
 
-export const StyledAnchor = glamorous(WrappedAnchor, { rootEl: 'a' })(
-  ...styles
-);
-
 /* eslint-disable jsx-a11y/anchor-is-valid */
-const WrappedLink = ({ children, className, ...props }) => (
-  <RouterLink {...props}>
-    <a className={className}>{children}</a>
-  </RouterLink>
-);
+function WrappedLink({ children, className, ...props }) {
+  return (
+    <RouterLink {...props}>
+      <a className={cx(anchorStyle, className)}>{children}</a>
+    </RouterLink>
+  );
+}
 /* eslint-enable jsx-a11y/anchor-is-valid */
 
 WrappedLink.propTypes = {
@@ -46,27 +45,24 @@ WrappedLink.propTypes = {
   className: PropTypes.string
 };
 
-export const StyledLink = glamorous(WrappedLink)(...styles);
-
-const Anchor = props => {
+export default function Anchor(props) {
   const { href, route, to } = props;
 
   if (route || to || (isRelativeUrl(href) && !isUrlFragment(href))) {
-    const newProps = Object.assign({}, props, {
+    const newProps = {
+      ...props,
       href: undefined,
       route: route || to || href
-    });
+    };
 
-    return <StyledLink {...newProps} />;
+    return <WrappedLink {...newProps} />;
   } else {
-    return <StyledAnchor {...props} />;
+    return <WrappedAnchor {...props} />;
   }
-};
+}
 
 Anchor.propTypes = {
   href: PropTypes.string,
   route: PropTypes.string,
   to: PropTypes.string
 };
-
-export default Anchor;

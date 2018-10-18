@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 
-const PostHead = ({ post }) => {
+export default function PostHead({ post }) {
   const canonical = `https://disquisition.net/blog/${post.slug}`;
 
   return (
@@ -61,7 +61,7 @@ const PostHead = ({ post }) => {
       />
     </Head>
   );
-};
+}
 
 PostHead.propTypes = {
   post: PropTypes.shape({
@@ -80,5 +80,3 @@ PostHead.propTypes = {
     timestamp: PropTypes.number.isRequired
   }).isRequired
 };
-
-export default PostHead;

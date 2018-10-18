@@ -5,14 +5,20 @@ import React from 'react';
 import UL from '../components/unordered-list';
 import fetch from 'isomorphic-unfetch';
 import getOrigin from '../lib/get-origin';
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const BlogListItem = glamorous.li({ display: 'flex', marginBottom: '.25em' });
-const RightColumn = glamorous.div({ flex: '50% 1 1' });
-const LeftColumn = glamorous(RightColumn)({
-  textAlign: 'right',
-  marginRight: '1em'
-});
+const RightColumn = styled.div`
+  flex: 50% 1 1;
+`;
+const LeftColumn = styled(RightColumn)`
+  text-align: right;
+  margin-right: 1em;
+`;
+
+const BlogListItem = styled.li`
+  display: flex;
+  margin-bottom: 0.25em;
+`;
 
 export default class BlogPage extends React.Component {
   static async getInitialProps({ req }) {

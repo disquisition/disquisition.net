@@ -1,31 +1,35 @@
 import A from '../components/anchor';
 import Base from './base';
 import PropTypes from 'prop-types';
-import glamorous, { Div } from 'glamorous';
+import styled from 'react-emotion';
 
-const Logo = glamorous.span({
-  display: 'inline-block',
-  padding: '.125em .5em .3em',
-  marginBottom: '1em',
-  border: '2px solid black',
-  color: 'black',
-  fontSize: 24
-});
+export const Logo = styled.div`
+  text-align: center;
+`;
 
-const MainLayout = ({ children }) => (
-  <Base>
-    <Div textAlign="center">
-      <A route="about">
-        <Logo>disquisition.net</Logo>
-      </A>
-    </Div>
+export const LogoText = styled.span`
+  color: black;
+  font-size: 24px;
+  display: inline-block;
+  padding: 0.125em 0.5em 0.3em;
+  border: 2px solid black;
+  margin-bottom: 1em;
+`;
 
-    {children}
-  </Base>
-);
+export default function MainLayout({ children }) {
+  return (
+    <Base>
+      <Logo>
+        <A route="about">
+          <LogoText>disquisition.net</LogoText>
+        </A>
+      </Logo>
+
+      {children}
+    </Base>
+  );
+}
 
 MainLayout.propTypes = {
   children: PropTypes.node.isRequired
 };
-
-export default MainLayout;

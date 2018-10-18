@@ -5,7 +5,25 @@ import ResumeFooter from './resume/resume-footer';
 import ResumeHeader from './resume/resume-header';
 import Section from './resume/section';
 import Subheading from './resume/section-subheading';
-import glamorous, { P } from 'glamorous';
+import themes from '../themes';
+import styled, { css } from 'react-emotion';
+
+const leftBufferStyle = css`
+  margin-left: 1rem;
+`;
+
+const ResumeContainer = styled.div`
+  color: ${themes.resume.colors.text};
+  margin: auto;
+  width: 50rem;
+  max-width: 90%;
+
+  @media print {
+    font-size: 12px;
+    width: 100%;
+    max-width: 100%;
+  }
+`;
 
 const profileSection = (
   <Section title="Profile">
@@ -62,10 +80,10 @@ const skillsSection = (
     </List>
 
     <Subheading>Software</Subheading>
-    <P marginLeft="1rem">
+    <p className={leftBufferStyle}>
       Visual Studio 2015/2017, Adobe Creative Suite, Salesforce.com,
       ExactTarget, and Microsoft Office Suite
-    </P>
+    </p>
   </Section>
 );
 
@@ -137,41 +155,21 @@ const experienceSection = (
   </Section>
 );
 
-const ResumeWrapper = glamorous.div(
-  {
-    margin: 'auto',
-    width: '50rem',
-    maxWidth: '90%',
-    '@media print': {
-      fontSize: '12px',
-      width: '100%',
-      maxWidth: '100%'
-    }
-  },
-  ({ theme }) => ({
-    color: theme.resume.colors.text
-  })
-);
+export default function Resume() {
+  return (
+    <ResumeContainer>
+      <ResumeHeader />
 
-const Resume = props => (
-  <ResumeWrapper {...props}>
-    <ResumeHeader />
+      <ResumeBody>
+        <div>{experienceSection}</div>
+        <div>
+          {profileSection}
+          {skillsSection}
+          {educationSection}
+        </div>
+      </ResumeBody>
 
-    <ResumeBody
-      content={{
-        columnOne: () => <div>{experienceSection}</div>,
-        columnTwo: () => (
-          <div>
-            {profileSection}
-            {skillsSection}
-            {educationSection}
-          </div>
-        )
-      }}
-    />
-
-    <ResumeFooter />
-  </ResumeWrapper>
-);
-
-export default Resume;
+      <ResumeFooter />
+    </ResumeContainer>
+  );
+}

@@ -1,7 +1,8 @@
-import glamorous from 'glamorous';
+import themes from '../../themes';
+import styled from 'react-emotion';
 
-const TextLink = glamorous.a(({ theme }) => ({
-  color: theme.resume.colors.text
-}));
+const TextLink = styled.a`
+  color: ${themes.resume.colors.text};
+`;
 
 export default TextLink;

@@ -18,10 +18,11 @@ module.exports = {
   },
   rules: {
     // core
-    indent: ['error', 2],
-    quotes: ['error', 'single', { avoidEscape: true }],
+    indent: ['warn', 2],
+    quotes: ['warn', 'single', { avoidEscape: true }],
     'no-console': 'warn',
-    semi: ['error', 'always'],
+    'no-unused-vars': 'warn',
+    semi: ['warn', 'always'],
 
     // react
     'react/boolean-prop-naming': 'warn',

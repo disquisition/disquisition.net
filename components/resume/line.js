@@ -1,5 +1,7 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const Line = glamorous.p({ margin: 0 });
+const Line = styled.p`
+  margin: 0;
+`;
 
 export default Line;

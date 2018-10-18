@@ -1,9 +1,9 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const HorizontalRule = glamorous.hr({
-  border: 'none',
-  borderTop: '1px solid lightgrey',
-  margin: '1.5em 0'
-});
+const HorizontalRule = styled.hr`
+  border: none;
+  border-top: 1px solid lightgrey;
+  margin: 1.5em 0;
+`;
 
 export default HorizontalRule;

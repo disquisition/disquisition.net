@@ -1,6 +1,5 @@
 module.exports = {
-  setupFiles: ['<rootDir>/jest.setup.js'],
-  snapshotSerializers: ['jest-glamor-react'],
+  setupTestFrameworkScriptFile: '<rootDir>/jest.setup.js',
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   verbose: true
 };

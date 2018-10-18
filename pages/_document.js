@@ -1,10 +1,10 @@
 import Document, { Head, Main, NextScript } from 'next/document';
-import { renderStatic } from 'glamor/server';
+import { extractCritical } from 'emotion-server';
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
     const page = renderPage();
-    const styles = renderStatic(() => page.html);
+    const styles = extractCritical(page.html);
     return { ...page, ...styles };
   }
 
@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
     const { __NEXT_DATA__, ids } = props;
 
     if (ids) {
-      __NEXT_DATA__.glamor_cache = ids;
+      __NEXT_DATA__.emotion_cache = ids;
     }
   }
 

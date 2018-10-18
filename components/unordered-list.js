@@ -1,15 +1,18 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const UnorderedList = glamorous.ul(({ inline, unstyled }) => ({
-  paddingLeft: inline || unstyled ? '0' : '2em',
-  listStyleType: inline || unstyled ? 'none' : 'disc',
-  ' li': {
-    display: inline ? 'inline-block' : null,
-    paddingLeft: inline ? '1em' : null,
-    ':first-of-type': {
-      paddingLeft: inline ? 0 : null
+const UnorderedList = styled.ul`
+  padding-left: ${props => (props.inline || props.unstyled ? '0' : '2em')};
+  list-style-type: ${props =>
+    props.inline || props.unstyled ? 'none' : 'disc'};
+
+  li {
+    display: ${props => (props.inline ? 'inline-block' : null)};
+    padding-left: ${props => (props.inline ? '1em' : null)};
+
+    &:first-of-type {
+      padding-left: ${props => (props.inline ? 0 : null)};
     }
   }
-}));
+`;
 
 export default UnorderedList;

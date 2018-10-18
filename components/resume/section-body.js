@@ -1,24 +1,22 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
+import themes from '../../themes';
 
-const SectionBody = glamorous.section(
-  {
-    paddingLeft: '1.25rem',
-    borderLeftWidth: 3,
-    borderLeftStyle: 'solid',
-    '> :last-child': {
-      marginBottom: 0
-    },
-    ' *': {
-      marginTop: 0
-    },
-    '@media print': {
-      borderLeftWidth: 1
-    }
-  },
-  ({ theme }) => ({
-    fontFamily: theme.resume.fonts.serif,
-    borderLeftColor: theme.resume.colors.highlight
-  })
-);
+const SectionBody = styled.section`
+  font-family: ${themes.resume.fonts.serif};
+  padding-left: 1.25rem;
+  border-left: 3px solid ${themes.resume.colors.highlight};
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  * {
+    margin-top: 0;
+  }
+
+  @media print {
+    border-left-width: 1;
+  }
+`;
 
 export default SectionBody;

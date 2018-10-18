@@ -1,11 +1,11 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const Superscript = glamorous.sup({
-  position: 'relative',
-  fontSize: '75%',
-  lineHeight: 0,
-  verticalAlign: 'baseline',
-  top: '-.5em'
-});
+const Superscript = styled.sup`
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.5em;
+`;
 
 export default Superscript;

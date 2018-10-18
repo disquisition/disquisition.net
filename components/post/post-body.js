@@ -8,12 +8,11 @@ const createElementFactory = (aliases = {}) => (name, attrs, children) => {
   return React.createElement(component || name, attrs, children);
 };
 
-const PostBody = ({ aliases, hast }) =>
-  toH(createElementFactory(aliases), hast);
+export default function PostBody({ aliases, hast }) {
+  return toH(createElementFactory(aliases), hast);
+}
 
 PostBody.propTypes = {
   aliases: PropTypes.object,
   hast: PropTypes.object.isRequired
 };
-
-export default PostBody;

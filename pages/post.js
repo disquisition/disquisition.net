@@ -15,7 +15,15 @@ import redirectTo from '../lib/redirect-to';
 import Sup from '../components/superscript';
 import fetch from 'isomorphic-unfetch';
 import getOrigin from '../lib/get-origin';
-import { Article, Div } from 'glamorous';
+import styled from 'react-emotion';
+
+const PostContentContainer = styled.div`
+  max-width: 30em;
+  margin: auto;
+`;
+const PostContent = styled.article`
+  line-height: 1.6;
+`;
 
 const componentAliases = {
   a: A,
@@ -71,12 +79,12 @@ export default class PostPage extends React.Component {
 
         <PostHeroImage image={post.image} />
 
-        <Div maxWidth="30em" margin="auto">
+        <PostContentContainer>
           <A route="blog" css={{ ':hover': { textDecoration: 'none' } }}>
             ↜ Blog
           </A>
 
-          <Article lineHeight={1.6}>
+          <PostContent>
             <PostHeader date={post.date}>{post.title}</PostHeader>
 
             <PostBody hast={post.content} aliases={componentAliases} />
@@ -84,8 +92,8 @@ export default class PostPage extends React.Component {
             <Hr />
 
             <PostFooter />
-          </Article>
-        </Div>
+          </PostContent>
+        </PostContentContainer>
       </Page>
     ) : null;
   }

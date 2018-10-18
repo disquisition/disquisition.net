@@ -1,14 +1,15 @@
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
 
-const JobDescription = glamorous.p({
-  fontSize: '0.8rem',
-  letterSpacing: '0.1rem',
-  textTransform: 'uppercase',
-  marginBottom: '1rem',
-  '@media print': {
-    fontSize: '0.6rem',
-    marginBottom: '0.5rem'
+const JobDescription = styled.p`
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+
+  @media print {
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
   }
-});
+`;
 
 export default JobDescription;
